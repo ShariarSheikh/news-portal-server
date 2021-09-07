@@ -1,4 +1,5 @@
 require("dotenv").config({ path: "./config.env" });
+const cors = require("cors");
 const express = require("express");
 //connecting to db
 const connectDb = require("./config/db");
@@ -6,6 +7,8 @@ connectDb();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 
 //routing start
 app.use("/auth", require("./routers/userAuth"));
