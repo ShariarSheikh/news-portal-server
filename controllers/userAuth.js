@@ -1,34 +1,21 @@
 const User = require("../models/User");
 const Admin = require("../models/Admin");
 
-// exports.register = async (req, res, nex) => {
-//   const { username, email, password } = req.body;
-
-//   try {
-//     const user = await User.create({
-//       username,
-//       email,
-//       password,
-//     });
-//     res.status(200).json({ success: true, user: user });
-//   } catch (error) {
-//     res.status(500).json({ success: false, error: error });
-//   }
-// };
-
 exports.register = async (req, res, nex) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
   try {
-    const user = await Admin.create({
+    const user = await User.create({
+      username,
       email,
       password,
     });
-    sendToken(user, 200, res);
+    res.status(200).json({ success: true, user: user });
   } catch (error) {
     res.status(500).json({ success: false, error: error });
   }
 };
+
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
